@@ -6,11 +6,14 @@ categories: aws snowcone data-transfer
 tags: [aws, snowcone, data-transfer, nfs, datasync, edge-computing]
 ---
 
+
 If you're looking for a movie reference, look no further. Yes, I'm referring to the Robert Redford and Faye Dunaway movie [Three Days of the Condor](https://www.imdb.com/title/tt0073802/). A not-so-spy type has to hide from internal assets trying to eliminate him. Good movie. Very 70's.
 
 This is a deep dive in to my three days with an AWS Snowcone unit. AWS Snowcone is a portable, rugged, and secure edge computing and data transfer device that enables you to collect, process, and move data to AWS. This comprehensive guide walks through the complete setup process, from ordering to data transfer using both NFS and DataSync methods.
 
 ## Ordering and Delivery
+
+As of Nov/2024 the Snowball device has been discontinued: *[AWS Snow device updates](https://aws.amazon.com/blogs/storage/aws-snow-device-updates/)*
 
 * **Ordered**: December 10, 2023
 * **Shipping Label (UPS) created**: March 27, 2024
@@ -19,7 +22,7 @@ This is a deep dive in to my three days with an AWS Snowcone unit. AWS Snowcone 
 
 After receiving, the console still showed "Delivered to you", but still in transit on the left:
 
-![Snowcone Console Status](/images/snowcone/snowcone_01.png)
+![Snowcone Console Status](/assets/images/snowcone/snowcone_01.png)
 
 ### Performance and Cost Considerations
 
@@ -38,7 +41,7 @@ On a 1Gbit connection without additional optimization (e.g., jumbo frames), an a
 
 The Snowcone device was powered up using a 61W USB-C power source and connected to the LAN using DHCP. It will show **Locked** and the IP address on the display:
 
-<img src="/images/snowcone/snowcone_00a.png" alt="Snowcone Device Display" width="350" style="border: 2px solid #ccc;">
+<img src="/assets/images/snowcone/snowcone_00a.png" alt="Snowcone Device Display" width="350" style="border: 2px solid #ccc;">
 
 ### 2. Download OpsHub for Snow Family
 
@@ -46,7 +49,7 @@ The OpsHub application is used to unlock and configure the Snowcone. Download it
 
 Once downloaded, open the **Applications** folder and copy the OpsHub app:
 
-![OpsHub Installation](/images/snowcone/snowcone_02.png)
+![OpsHub Installation](/assets/images/snowcone/snowcone_02.png)
 
 ### 3. Get the Unlock Code and Manifest File
 
@@ -56,21 +59,21 @@ Both the **Unlock code** and **Manifest file** are required to unlock the device
 
 The Unlock code and Manifest file are at the bottom of the page in the **Credentials** widget:
 
-![AWS Console Credentials](/images/snowcone/snowcone_03.png)
+![AWS Console Credentials](/assets/images/snowcone/snowcone_03.png)
 
 ### 4. Launch OpsHub
 
 Launch OpsHub and choose **Snowcone**:
 
-![OpsHub Device Selection](/images/snowcone/snowcone_04.png)
+![OpsHub Device Selection](/assets/images/snowcone/snowcone_04.png)
 
 ### 5. Sign In and Unlock the Device
 
 Click the **Sign in** button, and using the **Unlock code** and **Manifest file**, unlock the device:
 
-![OpsHub Sign In](/images/snowcone/snowcone_05.png)
+![OpsHub Sign In](/assets/images/snowcone/snowcone_05.png)
 
-![OpsHub Unlock Process](/images/snowcone/snowcone_06.png)
+![OpsHub Unlock Process](/assets/images/snowcone/snowcone_06.png)
 
 Optionally, choose a **Profile name**.
 
@@ -78,7 +81,7 @@ Optionally, choose a **Profile name**.
 
 Once unlocked, the OpsHub screen should display the device status:
 
-![OpsHub Device Status](/images/snowcone/snowcone_07.png)
+![OpsHub Device Status](/assets/images/snowcone/snowcone_07.png)
 
 The Snowcone device is now ready for services to be configured and started.
 
@@ -95,15 +98,15 @@ In the **Transfer data with NFS** widget, press the **Enable & start** button. T
 
 Verify that the Data Transfer service has started:
 
-![NFS Service Started](/images/snowcone/snowcone_08.png)
+![NFS Service Started](/assets/images/snowcone/snowcone_08.png)
 
 In OpsHub, in the **Services** section, click on the **NFS Storage** service. This provides the endpoint (S3 bucket for this example) and the mount point on the local machine:
 
-![NFS Storage Service Details](/images/snowcone/snowcone_09.png)
+![NFS Storage Service Details](/assets/images/snowcone/snowcone_09.png)
 
 After the NFS Service starts, the OpsHub app will launch a Finder window:
 
-![Finder Window](/images/snowcone/snowcone_10.png)
+![Finder Window](/assets/images/snowcone/snowcone_10.png)
 
 The NFS mount can also be seen at the command line:
 
@@ -128,7 +131,7 @@ rsync -av /Volumes/data_drive1/* .
 
 In OpsHub, go to the **Sync with cloud** widget and click **Start**:
 
-![DataSync Service Start](/images/snowcone/snowcone_17.png)
+![DataSync Service Start](/assets/images/snowcone/snowcone_17.png)
 
 This may launch a wizard. If it does, the **Start DataSync agent** form is populated with the Device IP address and Physical network interface fields. If the wizard doesn't launch, the configuration is done automatically.
 
@@ -147,7 +150,7 @@ On the AWS Console: **DataSync** → **Agents** → **Create agent** button. Use
 
 Click **Get key**, and a success message is shown:
 
-![DataSync Agent Key Success](/images/snowcone/snowcone_12.png)
+![DataSync Agent Key Success](/assets/images/snowcone/snowcone_12.png)
 
 > **NOTE**: Proceed to the next step before the activation key expires.
 
@@ -194,11 +197,11 @@ Verify settings and click **Create task**.
 
 Here's an example task configuration:
 
-![DataSync Task Configuration](/images/snowcone/snowcone_13.png)
+![DataSync Task Configuration](/assets/images/snowcone/snowcone_13.png)
 
 The information can also be verified in the Agent:
 
-![DataSync Agent Verification](/images/snowcone/snowcone_14.png)
+![DataSync Agent Verification](/assets/images/snowcone/snowcone_14.png)
 
 ### Start the Task
 
@@ -206,13 +209,13 @@ With the task selected, choose **Start** → **Start with defaults**.
 
 It will take a few minutes. Verify that the transfer has started. The **Execution status** should say **Transferring**.
 
-![DataSync Task Running](/images/snowcone/snowcone_15.png)
+![DataSync Task Running](/assets/images/snowcone/snowcone_15.png)
 
 Progress can also be tracked in CloudWatch:
 
 Select the task and in the **Logging** section, click on the **CloudWatch log group**. Once in the log group, select **Start tailing** for a live tail of the data being transferred.
 
-![CloudWatch Logging](/images/snowcone/snowcone_16.png)
+![CloudWatch Logging](/assets/images/snowcone/snowcone_16.png)
 
 > **NOTE**: The sync is not a continuous process; it only runs when the task is executed. Any new data added after the task runs will require the task to be re-run.
 
@@ -220,7 +223,7 @@ Select the task and in the **Logging** section, click on the **CloudWatch log gr
 
 This is what OpsHub looks like with both the NFS and DataSync services running:
 
-![OpsHub Complete View](/images/snowcone/snowcone_18.png)
+![OpsHub Complete View](/assets/images/snowcone/snowcone_18.png)
 
 ## Check Capacity
 
