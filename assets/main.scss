@@ -1,0 +1,151 @@
+---
+---
+
+@import "minima";
+
+/* Custom styles for blog images */
+.post-content img {
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin: 10px 0;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure inline images also get borders */
+img {
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Left sidebar content */
+.page-content {
+  position: relative;
+}
+
+.sidebar-content {
+  position: fixed;
+  left: 20px;
+  top: 80px;
+  width: 150px;
+  z-index: 10;
+  text-align: center;
+}
+
+.sidebar-title {
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 54px;
+  letter-spacing: -1px;
+  margin: 0 0 10px 0;
+  color: #424242;
+  text-decoration: none;
+  display: block;
+}
+
+.sidebar-title:visited {
+  color: #424242;
+}
+
+.sidebar-title:hover {
+  color: #111;
+  text-decoration: underline;
+}
+
+.sidebar-image-link {
+  display: block;
+  margin: 0 0 10px 0;
+}
+
+.sidebar-image-link:hover {
+  opacity: 0.9;
+}
+
+.sidebar-image {
+  width: 100%;
+  height: auto;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar-image-link:hover .sidebar-image {
+  opacity: 1.0;
+}
+
+.sidebar-github {
+  font-size: 14px;
+}
+
+.sidebar-github a {
+  color: #333;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.sidebar-github a:hover {
+  color: #0366d6;
+}
+
+.github-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Adjust main content to make room for sidebar image */
+@media screen and (min-width: 1200px) {
+  .wrapper {
+    margin-left: 200px;
+  }
+}
+
+/* Hide sidebar content on smaller screens */
+@media screen and (max-width: 1199px) {
+  .sidebar-content {
+    display: none;
+  }
+}
+
+/* Custom syntax highlighting - make red text darker and easier to read */
+.highlight .c,    /* Comments */
+.highlight .c1,   /* Single line comments */
+.highlight .cm,   /* Multi-line comments */
+.highlight .cp,   /* Preprocessor comments */
+.highlight .cs {  /* Special comments */
+  color: #6a737d !important; /* Darker gray instead of bright red */
+}
+
+.highlight .err { /* Error highlighting */
+  color: #d73a49 !important; /* Darker red instead of bright red */
+}
+
+.highlight .s,    /* Strings */
+.highlight .s1,   /* Single quoted strings */
+.highlight .s2,   /* Double quoted strings */
+.highlight .se,   /* String escapes */
+.highlight .sh,   /* String heredoc */
+.highlight .si,   /* String interpolation */
+.highlight .sx,   /* String other */
+.highlight .sr,   /* String regex */
+.highlight .ss {  /* String symbol */
+  color: #032f62 !important; /* Dark blue instead of red */
+}
+
+.highlight .na,   /* Name attribute */
+.highlight .nb,   /* Name builtin */
+.highlight .nc,   /* Name class */
+.highlight .no,   /* Name constant */
+.highlight .nd,   /* Name decorator */
+.highlight .ni,   /* Name entity */
+.highlight .ne,   /* Name exception */
+.highlight .nf,   /* Name function */
+.highlight .nl,   /* Name label */
+.highlight .nn,   /* Name namespace */
+.highlight .nt,   /* Name tag */
+.highlight .nv,   /* Name variable */
+.highlight .nx {  /* Name other */
+  color: #6f42c1 !important; /* Purple instead of red */
+}
