@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The Egg Sandwich"
+title:  "Lunch: The Sandwich"
 date:   2023-07-22 08:30:00 -0700
 categories: food cooking breakfast
 tags: [recipes, breakfast, sandwich, quick-meals]
@@ -8,7 +8,7 @@ tags: [recipes, breakfast, sandwich, quick-meals]
 
 # The Egg Sandwich
 
-There's something deeply satisfying about a well-made egg sandwich. It's simple, yet when done right, it transforms basic ingredients into a great meal. 
+There's something deeply satisfying about a well-made egg sandwich. It's simple, yet when done right, it is great comfort food. 
 
 <img src="/assets/images/food_drink/egg_sandwhich.jpg" alt="Homemade egg sandwich with cheese" width="600px">
 
