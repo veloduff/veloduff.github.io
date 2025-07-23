@@ -85,11 +85,14 @@ filesystem_summary:      1007.1T       11.3G     1007.1T   1% /mnt/lustre
 
 The total size of the file system will depend on the size of the cluster and the size of each OST. 
 
-In the `ansible-playbooks/pcluster-lustre/lustre_fs_settings.sh` file the size of the OST and number of OSTs per OSS can be changed. Here are the settings for the ***small*** file system, that is 96TB file system with 40K IOPS:
+Note: Each MDS will get one MDT, and the MGS has mirrored MGT volumes.
+
+In the `ansible-playbooks/pcluster-lustre/lustre_fs_settings.sh` file the size of the OST and number of OSTs per OSS can be changed. Here are the settings for the ***small*** file system. With the defaults, it is 96TB file system with 40K IOPS:
+
 
 ```sh
         "small")
-            # High performance: 40K IOPS, 96TB capacity
+            # Default performance: 20K IOPS, 4.8TB capacity
             MDT_USE_LOCAL=false
             OST_USE_LOCAL=false
             
@@ -115,7 +118,25 @@ In the `ansible-playbooks/pcluster-lustre/lustre_fs_settings.sh` file the size o
             ;;
 ```
 
-Note: Each MDS will get one MDT, and the MGS has mirrored MGT volumes.
+The Ansible run file `ansible-playbooks/pcluster-lustre/run-pcluster-luster.sh` has the cluster size and
+instance types, for example:
+
+```
+        "small")
+            HEADNODE_INSTANCE_TYPE="m6idn.xlarge"
+            MGS_INSTANCE_TYPE="m6idn.large"
+            MGS_MIN_COUNT=1
+            MGS_MAX_COUNT=1
+            MDS_INSTANCE_TYPE="m6idn.xlarge"
+            MDS_MIN_COUNT=2
+            MDS_MAX_COUNT=8
+            OSS_INSTANCE_TYPE="m6idn.xlarge"
+            OSS_MIN_COUNT=4
+            OSS_MAX_COUNT=16
+            BATCH_INSTANCE_TYPE="m6idn.large"
+            BATCH_MIN_COUNT=4
+            BATCH_MAX_COUNT=32
+```
 
 ## Pre-Configured Cluster Sizes
 
