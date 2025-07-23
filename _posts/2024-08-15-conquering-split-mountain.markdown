@@ -55,7 +55,7 @@ The descent to Red Lake took about 3 hours, and we arrived back at camp with eno
 
 ## The Rough Hike Out 
 
-The hike out the following day was not straightforward, what should have been a quick hike out, was not.  We got off trail (again), and this time descended down toward the river coming down from Red Lake. Which meant we had hike north to re-gain all of the elevation we just lost, before hiking east and back to the trailhead.
+The hike out the following day was not straightforward, what should have been a quick hike out, was not.  We got off trail (again), and this time descended down toward the river coming from Red Lake. Which meant we had to hike north to re-gain all of the elevation we just lost, before we could hike east and back to the trailhead.
 
 ## Tips for Split Mountain
 
@@ -65,5 +65,5 @@ For those considering this climb, here are my key takeaways:
 
 2. **Weather Awareness**: Split Mountain creates its own weather systems. Start early and be off the summit by noon to avoid afternoon thunderstorms.
 
-3. **Route Finding**: Very little part of this hike/climb allowed for those head down moments, where trail is clear. There few trail markers, and the ones that are there, were not reliable. Take your time, and be constantly check if you're on trail or not.
+3. **Route Finding**: Very little part of this hike/climb allowed for those head down moments, where the trail is clear. There are few trail markers, and the ones that are there, were not reliable. Take your time, and be constantly checking if you're on or off trail.
 

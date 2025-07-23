@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Text-to-Image Contact Sheet Generator with Stable Diffusion"
-date:   2024-04-09 16:00:00 -0700
+date:   2025-04-09 16:00:00 -0700
 categories: aws bedrock ai machine-learning image-generation
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Brewing a Roasted Oatmeal Coffee Stout"
-date:   2023-10-15 18:30:00 -0700
+date:   2025-05-15 18:30:00 -0700
 categories: brewing beer stout coffee
 ---
 

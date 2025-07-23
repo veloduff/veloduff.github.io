@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "The Egg Sandwich"
-date:   2024-07-22 08:30:00 -0700
+date:   2023-07-22 08:30:00 -0700
 categories: food cooking breakfast
 tags: [recipes, breakfast, sandwich, quick-meals]
 ---
