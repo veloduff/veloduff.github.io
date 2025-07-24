@@ -12,6 +12,11 @@ AWS ParallelCluster provides an excellent foundation for deploying HPC infrastru
 
 In this post, I'll introduce my `cluster_setup.sh` script that automates post-deployment customization for AWS ParallelCluster environments. This script addresses common requirements for production HPC workloads that aren't covered by the default ParallelCluster deployment.
 
+**GitHub Repository**: [https://github.com/veloduff/hpc/tree/main/Cluster_Setup/cluster_setup.sh](https://github.com/veloduff/hpc/blob/main/Cluster_Setup/cluster_setup.sh)
+
+
+The complete cluster setup script and supporting tools are available in my HPC repository.
+
 ## Common Production Requirements
 
 Production HPC environments typically need several customizations beyond the basic cluster deployment:
@@ -27,7 +32,7 @@ My `cluster_setup.sh` script automates all these customizations in a single oper
 
 ## Prerequisites
 
-- An existing AWS ParallelCluster deployment (see my [Creating an HPC Cluster with AWS ParallelCluster](/aws/hpc/2025/06/15/creating-hpc-cluster-aws-parallelcluster.html) guide)
+- An existing AWS ParallelCluster deployment (see my [Creating an HPC Cluster with AWS ParallelCluster]({% post_url 2024-06-15-creating-hpc-cluster-aws-parallelcluster %}) guide)
 - Basic understanding of Linux and SSH
 
 ## Automating Cluster Customization
