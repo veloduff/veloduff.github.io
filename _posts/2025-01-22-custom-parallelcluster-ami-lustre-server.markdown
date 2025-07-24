@@ -68,28 +68,44 @@ dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarc
 dnf install -y https://zfsonlinux.org/epel/zfs-release-2-3$(rpm --eval "%{dist}").noarch.rpm
 
 # Install ZFS with kernel development headers
-dnf install -y kernel-devel zfs
+dnf install -y kernel-devel
+dnf install -y zfs
 ```
 
 ### 5. Verify DKMS and ZFS Installation
 ```bash
 # Check DKMS module compilation
 dkms status
+...
+zfs/2.2.8, 4.18.0-553.63.1.el8_10.x86_64, x86_64: installed
+...
 
 # Load ZFS kernel module
 modprobe -v zfs
+insmod /lib/modules/4.18.0-553.63.1.el8_10.x86_64/extra/spl.ko.xz
+insmod /lib/modules/4.18.0-553.63.1.el8_10.x86_64/extra/zfs.ko.xz
 
 # Verify ZFS functionality
 zpool version
+zfs-2.2.8-1
+zfs-kmod-2.2.8-1
 ```
 
 ### 6. Configure Lustre Repository
-Create the Lustre server repository configuration, this is for version `lustre-2.15.4/el8.9`, which does work with RHEL 8.10.
+
+**Current working versions:**
+
+| Lustre | RHEL | Kernel |
+|--------|------|--------|
+| lustre-2.15.4 | 8.10 | 4.18.0-553.54.1.el8_10 |
+| lustre-2.15.7 | 8.10 | 4.18.0-553.63.1.el8_10 |
+
+Example for v2.15.7:
 ```bash
 cat > /etc/yum.repos.d/lustre.repo << EOF
 [lustre-server]
 name=lustre-server
-baseurl=https://downloads.whamcloud.com/public/lustre/lustre-2.15.4/el8.9/server/
+baseurl=https://downloads.whamcloud.com/public/lustre/lustre-2.15.7/el8.10/server/
 exclude=*debuginfo*
 enabled=0
 gpgcheck=0
@@ -113,14 +129,34 @@ This installs:
 dnf --enablerepo=lustre-server install lustre-dkms lustre-osd-zfs-mount lustre
 ```
 
-
-### 9. Verify Installation
+### 9. Verify Lustre Installation
 ```bash
 # Load Lustre kernel module
 modprobe -v lustre
+insmod /lib/modules/4.18.0-553.63.1.el8_10.x86_64/extra/obdclass.ko.xz
+insmod /lib/modules/4.18.0-553.63.1.el8_10.x86_64/extra/ptlrpc.ko.xz
+insmod /lib/modules/4.18.0-553.63.1.el8_10.x86_64/extra/fld.ko.xz
+insmod /lib/modules/4.18.0-553.63.1.el8_10.x86_64/extra/fid.ko.xz
+insmod /lib/modules/4.18.0-553.63.1.el8_10.x86_64/extra/osc.ko.xz
+insmod /lib/modules/4.18.0-553.63.1.el8_10.x86_64/extra/lov.ko.xz
+insmod /lib/modules/4.18.0-553.63.1.el8_10.x86_64/extra/mdc.ko.xz
+insmod /lib/modules/4.18.0-553.63.1.el8_10.x86_64/extra/lmv.ko.xz
+insmod /lib/modules/4.18.0-553.63.1.el8_10.x86_64/extra/lustre.ko.xz
+```
 
-# Test Lustre control interface
-lctl
+Check both ZFS and Lustre with `lsmod`:
+```bash
+lsmod | egrep -i "zfs|lustre"
+lustre               1052672  0
+lmv                   208896  1 lustre
+mdc                   286720  1 lustre
+lov                   348160  2 mdc,lustre
+ptlrpc               2498560  7 fld,osc,fid,lov,mdc,lmv,lustre
+obdclass             3645440  8 fld,osc,fid,ptlrpc,lov,mdc,lmv,lustre
+zfs                  5607424  0
+spl                   122880  1 zfs
+lnet                  778240  6 osc,obdclass,ptlrpc,ksocklnd,lmv,lustre
+libcfs                196608  11 fld,lnet,osc,fid,obdclass,ptlrpc,ksocklnd,lov,mdc,lmv,lustre
 ```
 
 Within the `lctl` interface, you can verify networking:
@@ -133,7 +169,13 @@ lctl > list_nids
 172.31.26.176@tcp
 ```
 
-### 10. Clean up and create a new image
+### 10. Optionally install additional packages
+
+```sh
+dnf install pdsh pdsh-rcmd-ssh nvme-cli screen pcp-system-tools htop strace perf psmisc tree git wget nethogs stress iperf3 nmon
+```
+
+### 11. Clean up and create a new image
 
 Run the AMI clean up script:
 ```
