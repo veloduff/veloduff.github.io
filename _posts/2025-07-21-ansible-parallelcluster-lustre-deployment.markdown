@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Lustre Deployment with Ansible"
+title:  "Automated Lustre Deployment on AWS"
 date:   2025-07-21 07:00:00 -0700
 categories: aws hpc lustre parallelcluster ansible automation
 ---
@@ -94,51 +94,51 @@ In the `ansible-playbooks/pcluster-lustre/lustre_fs_settings.sh` file the size o
 
 
 ```sh
-        "small")
-            # Default performance: 20K IOPS, 4.8TB capacity
-            MDT_USE_LOCAL=false
-            OST_USE_LOCAL=false
-            
-            # MGT will be mirrored volumes
-            MGT_SIZE=1                         # Size (GB) for MGT volumes
-            MGT_VOLUME_TYPE="gp3"              # Volume type for MDT (io1, io2, gp3)
-            MGT_THROUGHPUT=125                 # MDT Throughput in MiB/s
-            MGT_IOPS=3000                      # MDT IOPS
-            
-            # Settings for MDTs when *NOT* using local disk (see MDT_USE_LOCAL)
-            MDTS_PER_MDS=1                     # Number of MDTs to create per MDS server
-            MDT_VOLUME_TYPE="io2"              # Volume type for MDT (io1, io2, gp3)
-            MDT_THROUGHPUT=1000                # MDT Throughput in MiB/s
-            MDT_SIZE=512                       # Size (GB) for MDT volumes
-            MDT_IOPS=12000                     # MDT IOPS
-            
-            # Settings for OSTs when *NOT* using local disk (see OST_USE_LOCAL)
-            OSTS_PER_OSS=1                     # Number of OSTs to create per OSS server
-            OST_VOLUME_TYPE="io1"              # Volume type for OST (io1, io2, gp3) 
-            OST_THROUGHPUT=250                 # Throughput in MiB/s
-            OST_SIZE=1200                      # Size (GB) for OST volumes 
-            OST_IOPS=3000                      # IOPS
-            ;;
+"small")
+    # Default performance: 20K IOPS, 4.8TB capacity
+    MDT_USE_LOCAL=false
+    OST_USE_LOCAL=false
+    
+    # MGT will be mirrored volumes
+    MGT_SIZE=1                         # Size (GB) for MGT volumes
+    MGT_VOLUME_TYPE="gp3"              # Volume type for MDT (io1, io2, gp3)
+    MGT_THROUGHPUT=125                 # MDT Throughput in MiB/s
+    MGT_IOPS=3000                      # MDT IOPS
+    
+    # Settings for MDTs when *NOT* using local disk (see MDT_USE_LOCAL)
+    MDTS_PER_MDS=1                     # Number of MDTs to create per MDS server
+    MDT_VOLUME_TYPE="io2"              # Volume type for MDT (io1, io2, gp3)
+    MDT_THROUGHPUT=1000                # MDT Throughput in MiB/s
+    MDT_SIZE=512                       # Size (GB) for MDT volumes
+    MDT_IOPS=12000                     # MDT IOPS
+    
+    # Settings for OSTs when *NOT* using local disk (see OST_USE_LOCAL)
+    OSTS_PER_OSS=1                     # Number of OSTs to create per OSS server
+    OST_VOLUME_TYPE="io1"              # Volume type for OST (io1, io2, gp3) 
+    OST_THROUGHPUT=250                 # Throughput in MiB/s
+    OST_SIZE=1200                      # Size (GB) for OST volumes 
+    OST_IOPS=3000                      # IOPS
+    ;;
 ```
 
 The Ansible run file `ansible-playbooks/pcluster-lustre/run-pcluster-luster.sh` has the cluster size and
 instance types, for example:
 
 ```
-        "small")
-            HEADNODE_INSTANCE_TYPE="m6idn.xlarge"
-            MGS_INSTANCE_TYPE="m6idn.large"
-            MGS_MIN_COUNT=1
-            MGS_MAX_COUNT=1
-            MDS_INSTANCE_TYPE="m6idn.xlarge"
-            MDS_MIN_COUNT=2
-            MDS_MAX_COUNT=8
-            OSS_INSTANCE_TYPE="m6idn.xlarge"
-            OSS_MIN_COUNT=4
-            OSS_MAX_COUNT=16
-            BATCH_INSTANCE_TYPE="m6idn.large"
-            BATCH_MIN_COUNT=4
-            BATCH_MAX_COUNT=32
+"small")
+    HEADNODE_INSTANCE_TYPE="m6idn.xlarge"
+    MGS_INSTANCE_TYPE="m6idn.large"
+    MGS_MIN_COUNT=1
+    MGS_MAX_COUNT=1
+    MDS_INSTANCE_TYPE="m6idn.xlarge"
+    MDS_MIN_COUNT=2
+    MDS_MAX_COUNT=8
+    OSS_INSTANCE_TYPE="m6idn.xlarge"
+    OSS_MIN_COUNT=4
+    OSS_MAX_COUNT=16
+    BATCH_INSTANCE_TYPE="m6idn.large"
+    BATCH_MIN_COUNT=4
+    BATCH_MAX_COUNT=32
 ```
 
 ## Pre-Configured Cluster Sizes

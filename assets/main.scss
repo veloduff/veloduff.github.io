@@ -201,3 +201,16 @@ img {
 .highlight .nx {  /* Name other */
   color: #6f42c1 !important; /* Purple instead of red */
 }
+
+/* Reduce font size for code blocks */
+.highlight,
+pre,
+code {
+  font-size: 14px !important;
+}
+
+/* Inline code styling */
+p code,
+li code {
+  font-size: 14px !important;
+}
