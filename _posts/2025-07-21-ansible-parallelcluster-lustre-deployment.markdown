@@ -7,7 +7,9 @@ categories: aws hpc lustre parallelcluster ansible automation
 
 Deploying high-performance Lustre filesystems on AWS ParallelCluster traditionally requires extensive manual configuration and coordination across multiple components. This Ansible-based automation process provides an interactive deployment that handles everything from cluster sizing to post-installation configuration.
 
-**GitHub Repository**: [https://github.com/veloduff/hpc/ansible-playbooks/pcluster-lustre](https://github.com/veloduff/hpc/tree/403f0fd867961187baf6446d151eec40d218ff0f/ansible-playbooks/pcluster-lustre)
+**Important**: This is a **step-by-step Lustre deployment process** that builds each Lustre component individually (MGS, MDS, OSS) and creates the filesystem from scratch. This approach **does not use AWS built-in services** like Amazon FSx for Lustre, but instead deploys a native Lustre filesystem directly on EC2 instances with full control over configuration, performance tuning, and customization.
+
+**GitHub Repository**: [https://github.com/veloduff/hpc/ansible-playbooks/pcluster-lustre](https://github.com/veloduff/hpc/tree/main/ansible-playbooks/pcluster-lustre)
 
 The complete automation scripts, Ansible playbooks, and supporting tools referenced in this post are available in the repository. This includes the Lustre deployment automation, cluster setup scripts, and storage management utilities.
 
